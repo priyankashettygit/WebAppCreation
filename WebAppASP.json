@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "servicePlanName": {
+            "type": "string"
+        },
+        "autoscalesettingsName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string",
+            "defaultValue": "Standard",
+            "allowedValues": [
+                "Standard",
+                "Premium"
+            ]
+        },
+        "svcPlanSize": {
+            "defaultValue": "S1",
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/d5cc2f13-da0a-4507-9a02-28873902879f/resourceGroups/oipSandBoxRG/providers/Microsoft.Web/serverfarms/oipTestingAppPlan'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "[parameters('svcPlanSize')]",
+                "tier": "[parameters('sku')]",
+                "capacity": 1
+            },
+            "kind": "app",
+            "name": "[parameters('servicePlanName')]",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "name": "[parameters('servicePlanName')]",
+                "workerTierName": null,
+                "adminSiteName": null,
+                "hostingEnvironmentProfile": null,
+                "perSiteScaling": false,
+                "reserved": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            },
+            "dependsOn": []
+        }
+    ]
+}
